@@ -1,0 +1,13 @@
+transformers>=4.38.0
+torch>=2.0.0
+pandas>=1.5.3
+streamlit>=1.27.0
+datasets>=2.17.0
+scikit-learn>=1.2.2
+accelerate>=0.26.0
+tqdm>=4.64.1
+protobuf<=3.20.3
+sentence-transformers>=2.2.2
+faiss-cpu>=1.7.4
+fuzzywuzzy>=0.18.0
+python-Levenshtein>=0.12.2
