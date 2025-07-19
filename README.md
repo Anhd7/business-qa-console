@@ -1,3 +1,4 @@
+```markdown
 # 📈 Business Intelligence Q&A Console
 
 An interactive AI-powered tool that lets you ask natural language questions about financial data (from a CSV) and get **instant answers or predictions** — via Web UI or CLI.
@@ -65,7 +66,7 @@ python train_model.py
 streamlit run app.py
 ```
 
-- Real-time UI with model status indicators
+- Real-time UI with model status indicators  
 - Auto-formatted answers with Indian currency
 
 ---
@@ -100,7 +101,65 @@ Your CSV file should look like:
 
 ## 🔮 Smart Capabilities
 
-- "**next year Q1**" is auto-understood as Q5
-- Aliases like "ashish" → "Ashish" (case-insensitive)
-- Computes **yes/no answers**, **percentage growth**, or **forecasted revenue**
+- "**next year Q1**" is auto-understood as Q5  
+- Aliases like "ashish" → "Ashish" (case-insensitive)  
+- Computes **yes/no answers**, **percentage growth**, or **forecasted revenue**  
 - Uses fallback model (Average Growth) if data is sparse
+
+---
+
+## ✅ Run Tests with `test.py`
+
+To verify that everything is working, run the included test suite:
+
+```bash
+pytest test.py -v
+```
+
+This will:
+- Check basic Q&A queries
+- Validate predictions
+- Handle edge cases like unknown topics or missing quarters
+
+> ⚠️ Make sure the model (`qa_finetuned/`) and `Business Heads.csv` are in place, or the tests may fail.
+
+You can add your own test cases in `test.py` to extend or customize this behavior for your data.
+
+---
+
+## 🔄 Use Your Own CSV File
+
+Want to use your own quarterly financial data?
+
+### 1. Prepare Your CSV
+
+Structure your file like this:
+
+| Business Head     | Q1   | Q2   | Q3   | Q4   |
+|-------------------|------|------|------|------|
+| John Doe          | 1200 | 1500 | 1800 | 2100 |
+| Jane Smith        | 1000 | 1100 | 1050 | 1300 |
+
+- You can rename `Business Head` to something else (like `Department`, `Region`, or `Manager`)
+- Make sure quarter columns follow the format `Q1`, `Q2`, `Q3`, `Q4`
+
+### 2. Update `config.py`
+
+```python
+MODEL_CONFIG = {
+    "model_path": "qa_finetuned",
+    "csv_path": "YourNewFile.csv",  # <-- Update this
+    "topic_column": "YourColumnName"  # <-- Match your CSV column header
+}
+```
+
+### 3. Rebuild and Retrain
+
+```bash
+python dataset_builder.py
+python train_model.py
+```
+
+Now you can ask questions like:  
+> *"What is the revenue of Jane Smith in Q2?"*  
+> *"Did John Doe’s revenue increase from Q1 to Q3?"*
