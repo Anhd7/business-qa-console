@@ -1,4 +1,3 @@
-```markdown
 # 📈 Business Intelligence Q&A Console
 
 An interactive AI-powered tool that lets you ask natural language questions about financial data (from a CSV) and get **instant answers or predictions** — via Web UI or CLI.
